@@ -9,7 +9,7 @@ InitCommand="%function(self)
 	
 	songName = GAMESTATE:GetCurrentSong():GetSongDir();
 	
-	m_bl = 60/170 --use this to define length of a beat for use in the rest of the song
+	m_bl = 60/175 --use this to define length of a beat for use in the rest of the song
 	sw = SCREEN_WIDTH
 	sh = SCREEN_HEIGHT 
 	rotatey = rotationy
@@ -64,6 +64,17 @@ end"
 	"/>
 	<Layer
 		File="../window.png"
+		OnCommand="%
+		function(self)
+			self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+			self:diffusealpha(0)
+			self:hidden(1)
+			prefix_background = self
+		end
+	"/>
+	<Layer
+		Type="Sprite"
+		File="../bg/explosion 5x5.png"
 		OnCommand="%
 		function(self)
 			self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
@@ -246,14 +257,14 @@ end"
 						--{36, 10, 0, 45, function(a) SCREENMAN:GetTopScreen():rotationz(a) end, 'len', linear},
 						
 						----------------Separate Playfields (timing) ------------------
-						<!--{x, .8, 0, 50, 'movex', 'len', outExpo, 1},
-						{x, .8, 50, 100, 'movex', 'len', outExpo, 1},
-						{x, .8, 100, 200, 'movex', 'len', outExpo, 1},
-						{x, 47.9, 200, 200, 'movex', 'len', inCirc, 1},
-						{x, .8, 0, -50, 'movex', 'len', outExpo, 2},
-						{x, .8, -50, -100, 'movex', 'len', outExpo, 2},
-						{x, .8, -100, -200, 'movex', 'len', outExpo, 2},
-						{68.1, 47.9, -200, -200, 'movex', 'len', inCirc, 2}, -->
+						--{x, .8, 0, 50, 'movex', 'len', outExpo, 1},
+						--{x, .8, 50, 100, 'movex', 'len', outExpo, 1},
+						--{x, .8, 100, 200, 'movex', 'len', outExpo, 1},
+						--{x, 47.9, 200, 200, 'movex', 'len', inCirc, 1},
+						--{x, .8, 0, -50, 'movex', 'len', outExpo, 2},
+						--{x, .8, -50, -100, 'movex', 'len', outExpo, 2},
+						--{x, .8, -100, -200, 'movex', 'len', outExpo, 2},
+						--{68.1, 47.9, -200, -200, 'movex', 'len', inCirc, 2},
 						-----------------------------------------------------
 						
 						
