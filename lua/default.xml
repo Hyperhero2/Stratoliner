@@ -489,9 +489,12 @@ end"
 						{103, 0.5, 0, 100, 'drunk', 'len', outExpo},
 						{103.5, 2, 0, 100, 'movex', 'len', inOutCubic},
 						{103.5, 2, 0, 100, 'incoming', 'len', outExpo},
+						{103.5, 0.5, 0, -50, 'skewx', 'len', outExpo},
 						{103.5, 0.5, 0, 250, 'holdgirth3', 'len', outExpo},
 						{104, 1.5, 0, 250, 'holdgirth0', 'len', outExpo},
+						{104, 1.5, 0, 50, 'skewx', 'len', outExpo},
 						{105.5, 1.5, 0, 250, 'holdgirth2', 'len', outExpo},
+						{105.5, 1.5, 0, 50, 'skewy', 'len', outExpo},
 						{105.5, 1, 100, 100, 'incoming', 'len', outExpo},
 						{105.5, 2, 100, 100, 'movex', 'len', outElastic},
 						
@@ -505,13 +508,13 @@ end"
 						{111, 0.5, 0, 100, 'tipsy', 'len', outExpo},
 						
 						{112, 1, 0, 250, 'holdgirth3', 'len', outExpo},
-						{112, 1, 0, 100, 'skewx', 'len', outExpo},
+						{112, 1, 0, -50, 'skewx', 'len', outExpo},
 						{113, 1, 0, 250, 'holdgirth1', 'len', outExpo},
-						{113, 1, 0, -100, 'skewy', 'len', outExpo},
+						{113, 1, 0, -50, 'skewy', 'len', outExpo},
 						{114, 1, 0, 250, 'holdgirth2', 'len', outExpo},
-						{114, 1, 0, 100, 'skewy', 'len', outExpo},
+						{114, 1, 0, 50, 'skewy', 'len', outExpo},
 						{115, 1, 0, 250, 'holdgirth0', 'len', outExpo},
-						{115, 1, 0, -100, 'skewx', 'len', outExpo},
+						{115, 1, 0, 50, 'skewx', 'len', outExpo},
 						{116, 0.1, 250, 0, 'holdgirth0', 'len', linear},
 						
 						----- cheating on the background ftw -----
