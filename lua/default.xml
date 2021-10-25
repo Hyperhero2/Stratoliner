@@ -101,16 +101,6 @@ end"
 			prefix_window = self
 		end
 	"/>
-	<Layer
-		Type="Sprite"
-		File="../bg/explosion 5x5.png"
-		OnCommand="%
-		function(self)
-			self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
-			self:diffusealpha(1)
-			prefix_explosion = self
-		end
-	"/>
 	<Layer Type="ActorProxy" GetProxyMessageCommand="%function(self)
 	self:SetTarget(P1)
 	prefix_player1 = self
@@ -235,6 +225,8 @@ end"
 				{20, 21, '*2 2.5x', 'end'},
 				{24, 28, '*1 1x', 'end'},
 				{28, 29, '*2 2.5x', 'end'},
+				{163, 164, '*2 0.2x', 'end'},
+				{164, 164.5, '*-1 2.5x', 'end'},
 				--{3, 1.5, '*5 300% confusion, 400% zoomx', 'len'},
 			}
 			local function mod_insert(newMod)
@@ -411,6 +403,7 @@ end"
 						{36, 0.1, 0, 1, function(a) prefix_field:diffusealpha(a) end, 'len', outExpo},
 						{36, 0.1, 0, 1, function(a) prefix_sky:diffusealpha(a) end, 'len', outExpo},
 						{36, 0.1, 0, 1, function(a) prefix_space:diffusealpha(a) end, 'len', outExpo},
+						{300, 5, 1, 0, function(a) prefix_space:diffusealpha(a) end, 'len', outExpo},
 						{36, 15, 0, 200, 'space', 'len', linear},
 						{36, 15, 0, 50, 'mini', 'len', inExpo},
 						{51, 13, 200, 200, 'space', 'len', outExpo},
@@ -423,6 +416,8 @@ end"
 						{65.5, 0.5, -200, 200, 'movex', 'len', inElastic},
 						{66, 0.5, -200, 0, 'movex', 'len', inElastic},
 						{68, 10, 150, 2000, function(a) prefix_field:y(a) end, 'len', outExpo},
+						{355, 0.1, 2000, 500, function(a) prefix_field:y(a) end, 'len', outExpo},
+						{356, 1, 500, 150, function(a) prefix_field:y(a) end, 'len', outExpo},
 						{68, 1, 0, 100, 'wave', 'len', inCirc},
 						{68, 1, 0, -50, 'tornado', 'len', inCirc},
 						--{69, 10, 100, 100, 'wave', 'len', inCirc},
@@ -489,6 +484,7 @@ end"
 						{103, 0.5, 0, 100, 'drunk', 'len', outExpo},
 						{103.5, 2, 0, 100, 'movex', 'len', inOutCubic},
 						{103.5, 2, 0, 100, 'incoming', 'len', outExpo},
+						
 						{103.5, 0.5, 0, -50, 'skewx', 'len', outExpo},
 						{103.5, 0.5, 0, 250, 'holdgirth3', 'len', outExpo},
 						{104, 1.5, 0, 250, 'holdgirth0', 'len', outExpo},
@@ -517,6 +513,27 @@ end"
 						{115, 1, 0, 50, 'skewx', 'len', outExpo},
 						{116, 0.1, 250, 0, 'holdgirth0', 'len', linear},
 						
+						{116, 1.5, 0, 20, 'rotationy', 'len', outExpo},
+						{116, 1.5, 0, -5, 'rotationx', 'len', outExpo},
+						{116.75, 0.75, 0, -100, 'tipsy', 'len', outExpo},
+						{117.5, 1, 0, 5000, 'tinyz', 'len', outExpo},
+						{117.5, 1, 0, 100, 'skewy', 'len', outExpo},
+						{118.5, 0.5, 5000, 0, 'tinyz', 'len', outExpo},
+						{118.5, 0.5, 100, 0, 'skewy', 'len', outExpo},
+						{119, 0.5, 0, -200, 'drunk', 'len', outExpo},
+						
+						{119.5, 2, 0, -100, 'movex', 'len', inOutCubic},
+						{119.5, 2, 0, 100, 'incoming', 'len', outExpo},
+						
+						{119.5, 0.5, 0, -50, 'skewx', 'len', outExpo},
+						{119.5, 0.5, 0, 250, 'holdgirth3', 'len', outExpo},
+						{120, 1.5, 0, 250, 'holdgirth0', 'len', outExpo},
+						{120, 1.5, 0, 50, 'skewx', 'len', outExpo},
+						{121.5, 1.5, 0, 250, 'holdgirth2', 'len', outExpo},
+						{121.5, 1.5, 0, 50, 'skewy', 'len', outExpo},
+						{121.5, 1, 100, 100, 'incoming', 'len', outExpo},
+						{121.5, 2, -100, -100, 'movex', 'len', outElastic},
+						
 						----- cheating on the background ftw -----
 						{68, 10, 0, 2000, function(a) prefix_sky:y(a) end, 'len', linear},
 						{78, 0.1, 2000, 0, function(a) prefix_sky:y(a) end, 'len', linear},
@@ -530,16 +547,33 @@ end"
 						{118.4, 0.1, 2000, 0, function(a) prefix_sky:y(a) end, 'len', linear},
 						{118.5, 10, 0, 2000, function(a) prefix_sky:y(a) end, 'len', linear},
 						{128.5, 0.1, 2000, 0, function(a) prefix_sky:y(a) end, 'len', linear},
+						
+						{299, 1, 0, 1, function(a) prefix_sky:diffusealpha(a) end, 'len', linear},
+						{299, 10, 2000, 0, function(a) prefix_sky:y(a) end, 'len', linear},
+						{309, 0.1, 0, 2000, function(a) prefix_sky:y(a) end, 'len', linear},
+						{309.1, 10, 2000, 0, function(a) prefix_sky:y(a) end, 'len', linear},
+						{319.1, 0.1, 0, 2000, function(a) prefix_sky:y(a) end, 'len', linear},
+						{319.2, 10, 2000, 0, function(a) prefix_sky:y(a) end, 'len', linear},
+						{329.2, 0.1, 0, 2000, function(a) prefix_sky:y(a) end, 'len', linear},
+						{329.3, 10, 2000, 0, function(a) prefix_sky:y(a) end, 'len', linear},
+						{339.3, 0.1, 0, 2000, function(a) prefix_sky:y(a) end, 'len', linear},
+						{339.4, 10, 2000, 0, function(a) prefix_sky:y(a) end, 'len', linear},
+						{349.4, 0.1, 0, 2000, function(a) prefix_sky:y(a) end, 'len', linear},
+						{349.5, 6.5, 2000, 0, function(a) prefix_sky:y(a) end, 'len', linear},
 						---------------------
 						{148, 10, 1.5, 5, function(a) prefix_window:zoom(a) end, 'len', outExpo},
 						{148, 10, 1, 1.25, function(a) prefix_space:zoom(a) end, 'len', outExpo},
-						{196, 10, 400, 1000, function(a) prefix_space:x(a) end, 'len', outExpo},
+						{196, 7, 400, 550, function(a) prefix_space:x(a) end, 'len', outExpo},
+						{204, 2, 550, 400, function(a) prefix_space:x(a) end, 'len', outExpo},
+						{204, 2, 300, 350, function(a) prefix_space:y(a) end, 'len', outExpo},
+						{228, 2, 350, 100, function(a) prefix_space:y(a) end, 'len', outExpo},
+						{228, 2, 400, 250, function(a) prefix_space:x(a) end, 'len', outExpo},
+						{236, 2, 250, -250, function(a) prefix_space:x(a) end, 'len', outExpo},
+						{236, 2, 100, 400, function(a) prefix_space:y(a) end, 'len', outExpo},
 						{100, 32, 1, 0, function(a) prefix_sky:diffusealpha(a) end, 'len', linear},
-						--{52, 10, 0, 0.2, function(a) prefix_window:vibrate(a) end, 'len', outExpo},
+						{252, 6, -250, 400, function(a) prefix_space:x(a) end, 'len', outExpo},
+						{252, 6, 400, 300, function(a) prefix_space:y(a) end, 'len', outExpo},
 						{36, 10, 3, 1.5, function(a) prefix_window:zoom(a) end, 'len', outBack},
-						{300, 1, 0, 200, 'beat', 'len', inExpo},
-						{301, 40, 200, 200, 'beat', 'len', inExpo},
-						
 						
 						----------------Separate Playfields (timing) ------------------
 						{67, 1, 0, 250, 'movex', 'len', outExpo, 1},
@@ -562,6 +596,7 @@ end"
 						{75.75, 12.25, -250, -250, 'movex', 'len', outElastic, 1},
 						{75.75, 12.25, 250, 250, 'movex', 'len', outElastic, 2},
 						
+						--move--
 						{88, .75, -250, -150, 'movex', 'len', outElastic, 1},
 						{88, .75, 250, 150, 'movex', 'len', outElastic, 2},
 						{88.75, .75, -150, -50, 'movex', 'len', outElastic, 1},
@@ -576,14 +611,354 @@ end"
 						{91.25, .5, -200, -250, 'movex', 'len', outElastic, 2},
 						{91.75, 10.25, 250, 250, 'movex', 'len', outElastic, 1},
 						{91.75, 10.25, -250, -250, 'movex', 'len', outElastic, 2},
+						--
 						{102.5, 1, 250, 0, 'movex', 'len', outExpo, 1},
 						{102.5, 1, -250, 0, 'movex', 'len', outExpo, 2},
 						
-
-						--{x, .8, 0, -50, 'movex', 'len', outExpo, 2},
-						--{x, .8, -50, -100, 'movex', 'len', outExpo, 2},
-						--{x, .8, -100, -200, 'movex', 'len', outExpo, 2},
-						--{68.1, 47.9, -200, -200, 'movex', 'len', inCirc, 2},
+						{124, 5, 0, 100, 'tornado', 'len', outExpo, 1},
+						{124, 5, 0, -100, 'tornado', 'len', outExpo, 2},
+						
+						{128.5, 1.5, 0, 20, 'rotationz', 'len', outExpo},
+						{128.5, 1.5, 0, 5, 'rotationx', 'len', outExpo},
+						{130, 0.75, 0, 100, 'tipsy', 'len', outExpo},
+						{130, 1, 0, -10000, 'tinyz', 'len', outExpo},
+						{130.5, 1, 0, 100, 'skewy', 'len', outExpo},
+						{130.5, 0.5, -10000, 0, 'tinyz', 'len', outExpo},
+						{131, 0.5, 100, 0, 'skewy', 'len', outExpo},
+						{131, 0.5, 0, 100, 'drunk', 'len', outExpo},
+						
+						{148, 1, 0, 100, 'beaty, beatz, beat', 'len', outExpo},
+						{149, 13, 100, 100, 'beaty, beatz, beat', 'len', outExpo},
+						{164, 22, 100, 300, 'beat', 'len', outExpo, 1},
+						{164, 22, 100, -300, 'beat', 'len', outExpo, 2},
+						{178, 10, 0, 50, 'flip', 'len', inBounce},
+						{186, 2, 300, 0, 'beat', 'len', outExpo, 1},
+						{186, 2, 0, 400, 'movez', 'len', outExpo},
+						{186, 2, 0, 1000, 'skewy', 'len', inExpo},
+						{188, 2, 1000, 0, 'skewy', 'len', inExpo},
+						{186, 2, 0, 180, 'rotationz', 'len', inExpo},
+						{188, 7, 180, 0, 'rotationz', 'len', outExpo},
+						{186, 2, -300, 0, 'beat', 'len', outExpo, 2},
+						{188, 6, 50, -10, 'flip', 'len', inExpo},
+						{194, 0.5, -10, 100, 'flip', 'len', inExpo},
+						{194.5, 0.5, 100, 0, 'flip', 'len', inExpo},
+						
+						{196, 2, 0, 100, 'wave', 'len', inCirc},
+						{198, 0.5, 0, 10, 'flip', 'len', outExpo},
+						{198.5, 0.5, 0, 10, 'flip', 'len', outExpo},
+						{199, 0.5, 10, 20, 'flip', 'len', outExpo},
+						{199.5, 0.5, 20, 10, 'flip', 'len', inExpo},
+						{200, 0.5, 10, 20, 'flip', 'len', inExpo},
+						{200.5, 0.5, 20, 40, 'flip', 'len', inExpo},
+						{201, 0.5, 40, 20, 'flip', 'len', inExpo},
+						{201.5, 0.5, 20, 40, 'flip', 'len', inExpo},
+						{202, 0.5, 40, 20, 'flip', 'len', inExpo},
+						{202.5, 0.5, 20, 10, 'flip', 'len', inExpo},
+						{203.5, 0.5, 0, 0, 'flip', 'len', inExpo},
+						
+						{204, 1, 0, 100, 'flip', 'len', outExpo},
+						{205, 1, 100, 0, 'flip', 'len', outExpo},
+						
+						{206, 0.5, 0, 10, 'flip', 'len', outExpo},
+						{206.5, 0.5, 10, 20, 'flip', 'len', outExpo},
+						{207, 1, 20, 10, 'flip', 'len', inExpo},
+						{208, 0.5, 10, 20, 'flip', 'len', inExpo},
+						{208.5, 0.5, 20, 40, 'flip', 'len', inExpo},
+						{209, 0.5, 40, 20, 'flip', 'len', inExpo},
+						{209.5, 0.5, 20, 40, 'flip', 'len', inExpo},
+						{210, 0.5, 40, 20, 'flip', 'len', inExpo},
+						{210.5, 0.5, 20, 10, 'flip, confusion', 'len', inExpo},
+						{211, 0.5, 0, 0, 'flip', 'len', inExpo},
+						{196, 2, 0, -50, 'tornado', 'len', inCirc},
+						{196, 1.1, 0, -30, 'rotationz', 'len', outExpo},
+						{197, 1.1, -30, 30, 'rotationz', 'len', outExpo}, 
+						{197, 10, 100, 100, 'wave', 'len', inCirc},
+						{197, 10, -50, -50, 'tornado', 'len', inCirc},
+						
+						{212, 0.75, 0, -30, 'rotationy', 'len', outExpo},
+						{212, 0.75, 0, -5, 'rotationz', 'len', outExpo},
+						{212.75, 0.75, 0, 300, 'drunk', 'len', outExpo},
+						{213.5, 1, 0, -2000, 'tinyz', 'len', outExpo},
+						{213.5, 1, 0, 100, 'skewx', 'len', outExpo},
+						{214.5, 0.5, -2000, 0, 'tinyz', 'len', outExpo},
+						{214.5, 0.5, 100, 0, 'skewx', 'len', outExpo},
+						{215, 0.5, 0, 100, 'tipsy', 'len', outExpo},
+						
+						{216, 0.5, 0, 200, 'beaty, bumpyy', 'len', outElastic},
+						{216.5, 0.5, 200, 200, 'beaty, bumpyy', 'len', outElastic},
+						{217, 0.5, 200, 0, 'beaty, bumpyy', 'len', outElastic},
+						{218, 0.5, 0, 200, 'beat, bumpyx', 'len', outElastic},
+						{218.5, 0.5, 200, 200, 'beat, bumpyx', 'len', outElastic},
+						{219, 0.5, 200, 0, 'beat, bumpyx', 'len', outElastic},
+						
+						{221, 0.25, 0, 100, 'movez3', 'len', inExpo},
+						{221.25, 0.25, 100, 0, 'movez3', 'len', inExpo},
+						{221.5, 0.5, 0, 100, 'movez3', 'len', inExpo},
+						{221, 1, 0, sw/3, 'movex', 'len', outExpo},
+						{222, 1, sw/3, -sw/3, 'movex', 'len', outExpo},
+						{222, 0.5, 100, 0, 'movez3', 'len', inExpo},
+						
+						{223.5, 1, 0, 200, 'tipsy, drunk', 'len', inOutBack},
+						{224.5, 3, 200, 200, 'tipsy, drunk', 'len', inOutBack},
+						{224.5, 3.5, 0, 100, 'reverse', 'len', inOutBack},
+						{227.5, 1, 200, 0, 'tipsy, drunk', 'len', inOutBack},
+						{228, 20, 100, 100, 'reverse', 'len', linear},
+						{248, 5, 100, 0, 'reverse' ,'len', inOutBack},
+						{284, 4, 0, 100, 'reverse', 'len', linear},
+						{284, 2, 0, 90, 'rotationz', 'len', outExpo},
+						{286, 2, 90, 0, 'rotationz', 'len', outExpo},
+						{288, 80, 100, 100, 'reverse', 'len', linear},
+						
+						{228, 2, 0, 100, 'wave', 'len', inCirc},
+						{230, 0.5, 0, 10, 'flip', 'len', outExpo},
+						{230.5, 0.5, 10, 20, 'flip', 'len', outExpo},
+						{231, 1, 20, 10, 'flip', 'len', outExpo},
+						{232, 0.5, 10, 20, 'flip', 'len', inExpo},
+						{232.5, 0.5, 20, 40, 'flip', 'len', inExpo},
+						{233, 0.5, 40, 20, 'flip', 'len', inExpo},
+						{233.5, 0.5, 20, 40, 'flip', 'len', inExpo},
+						{234, 0.5, 40, 20, 'flip', 'len', inExpo},
+						{234.5, 0.5, 20, 10, 'flip', 'len', inExpo},
+						{235, 0.5, 10, 0, 'flip', 'len', inExpo},
+						
+						{236, 1, 0, 100, 'flip', 'len', outExpo},
+						{237, 1, 100, 0, 'flip', 'len', outExpo},
+						
+						{238, 0.5, 0, 10, 'flip', 'len', outExpo},
+						{238.5, 0.5, 10, 20, 'flip', 'len', outExpo},
+						{239, 1, 20, 10, 'flip', 'len', inExpo},
+						{240, 0.5, 10, 20, 'flip', 'len', inExpo},
+						{240.5, 0.5, 20, 40, 'flip', 'len', inExpo},
+						{241, 0.5, 40, 20, 'flip', 'len', inExpo},
+						{241.5, 0.5, 20, 40, 'flip', 'len', inExpo},
+						{242, 0.5, 40, 20, 'flip', 'len', inExpo},
+						{242.5, 0.5, 20, 10, 'flip, confusion', 'len', inExpo},
+						{243, 0.5, 0, 0, 'flip', 'len', inExpo},
+						
+						{288, 1, 0, 100, 'invert', 'len', outExpo},
+						{288, 1, 0, 157, 'confusionoffset', 'len', outExpo},
+						{289, 2, 100, 100, 'invert', 'len', outExpo},
+						{289, 2, 157, 157, 'confusionoffset', 'len', outExpo},
+						{291, 1, 100, 0, 'invert', 'len', outExpo},
+						{291, 1, 157, 0, 'confusionoffset', 'len', outExpo},
+						
+						{244, 0.25, 0, 100, 'movez3', 'len', inExpo},
+						{244.25, 0.25, 100, 0, 'movez3', 'len', inExpo},
+						{244.5, 0.5, 0, 100, 'movez3', 'len', inExpo},
+						{245, 1, 0, sw/3, 'movex', 'len', outExpo},
+						{246, 1, sw/3, -sw/3, 'movex', 'len', outExpo},
+						{247, 0.5, 100, 0, 'movez3', 'len', inExpo},
+						
+						{252, 0.5, 0, 50, 'skewx', 'len', outExpo},
+						{252.5, 0.5, 50, 100, 'skewx', 'len', outExpo},
+						{253, 1, 0, 50, 'skewy', 'len', outExpo},
+						{254, 1, 50, -50, 'skewy', 'len', outExpo},
+						{255, 0.5, 0, -50, 'skewx', 'len', outExpo},
+						{255.5, 0.5, -50, -100, 'skewx', 'len', outExpo},
+						{256, 0.5, -100, 100, 'skewx', 'len', outExpo},
+						{256.5, 0.5, 0, 50, 'skewy', 'len', outExpo},
+						{257, 1, 50, -50, 'skewy', 'len', outExpo},
+						{258, 1, 0, 100, 'skewx', 'len', outExpo},
+						{260, 1, 0, 50, 'flip', 'len', outExpo},
+						{261, 11, 50, 50, 'flip', 'len', outExpo},
+						{260, 10, 0, 100, 'tornado', 'len', outExpo},
+						{260, 1, 1, 1.25, function(a) 
+						local screen = SCREENMAN:GetTopScreen()
+						local transform = condor.zoom(a)
+						screen:x(transform.x)
+						screen:y(transform.y)
+						screen:zoom(transform.zoom)
+						end, 'len', outCirc},
+						{267.5, 0.5, 1.25, 1.5, function(a) 
+						local screen = SCREENMAN:GetTopScreen()
+						local transform = condor.zoom(a)
+						screen:x(transform.x)
+						screen:y(transform.y)
+						screen:zoom(transform.zoom)
+						end, 'len', outCirc},
+						{268, 0.5, 1.5, 1.75, function(a) 
+						local screen = SCREENMAN:GetTopScreen()
+						local transform = condor.zoom(a)
+						screen:x(transform.x)
+						screen:y(transform.y)
+						screen:zoom(transform.zoom)
+						end, 'len', outCirc},
+						{272, 4, 1.75, 1, function(a) 
+						local screen = SCREENMAN:GetTopScreen()
+						local transform = condor.zoom(a)
+						screen:x(transform.x)
+						screen:y(transform.y)
+						screen:zoom(transform.zoom)
+						end, 'len', outCirc},
+						
+						{284, 4, 1, 2, function(a) 
+						local screen = SCREENMAN:GetTopScreen()
+						local transform = condor.zoom(a)
+						screen:x(transform.x)
+						screen:y(transform.y)
+						screen:zoom(transform.zoom)
+						end, 'len', outCirc},
+						{288, 1, 2, 1, function(a) 
+						local screen = SCREENMAN:GetTopScreen()
+						local transform = condor.zoom(a)
+						screen:x(transform.x)
+						screen:y(transform.y)
+						screen:zoom(transform.zoom)
+						end, 'len', outCirc},
+						
+						
+						{276, 5, 0, 100, 'bumpyy', 'len', inOutBack},
+						{296, 0.75, 0, 100, 'movez3', 'len', outExpo},
+						{296.75, 0.75, 100, 200, 'movez3', 'len', outExpo},
+						{297.5, 0.75, 200, 300, 'movez3', 'len', outExpo},
+						{299, 1, 0, 200, 'beat', 'len', inExpo},
+						{292, 1, 0, 250, 'movex', 'len', outExpo, 2},
+						{292, 1, 0, -250, 'movex', 'len', outExpo, 1},
+						{293, 50, 250, 250, 'movex', 'len', linear, 2},
+						{293, 50, -250, -250, 'movex', 'len', linear, 1},
+						{300, 19, 200, 200, 'beat', 'len', inExpo},
+						{319, 5, 200, 0, 'beat', 'len', outExpo},
+						{323, 1, 0, 300, 'beaty, beatz, beat', 'len', inCirc},
+						{324, 32, 300, 300, 'beaty, beatz, beat', 'len', inCirc},
+						{356, 0.5, 300, 0, 'beaty, beatz, beat', 'len', inCirc},
+						
+						{300, 0.75, 0, 10, 'rotationz', 'len', outExpo},
+						{300, 0.75, 0, -5, 'rotationy', 'len', outExpo},
+						{300.75, 0.75, 0, -100, 'drunk', 'len', outExpo},
+						{301.5, 1, 0, -10000, 'tinyz', 'len', outExpo},
+						{301.5, 1, 0, 100, 'skewy', 'len', outExpo},
+						{302.5, 0.5, -10000, 0, 'tinyz', 'len', outExpo},
+						{302.5, 0.5, 100, 0, 'skewy', 'len', outExpo},
+						
+						{304, 0.5, 0, 200, 'beaty, bumpyy', 'len', outElastic},
+						{304.5, 0.5, 200, 200, 'beaty, bumpyy', 'len', outElastic},
+						{305, 0.5, 200, 0, 'beaty, bumpyy', 'len', outElastic},
+						{306, 0.5, 0, 200, 'beat, bumpyx', 'len', outElastic},
+						{306.5, 0.5, 200, 200, 'beat, bumpyx', 'len', outElastic},
+						{307, 0.5, 200, 0, 'beat, bumpyx', 'len', outElastic},
+						
+						{308, 0.75, 0, -20, 'rotationz', 'len', outExpo},
+						{308, 0.75, 0, -5, 'rotationx', 'len', outExpo},
+						{308.75, 0.75, 0, -100, 'tipsy', 'len', outExpo},
+						{309.5, 1, 0, -5000, 'tinyz', 'len', outExpo},
+						{309.5, 1, 0, -100, 'skewy', 'len', outExpo},
+						{310.5, 0.5, -5000, 0, 'tinyz', 'len', outExpo},
+						{310.5, 0.5, -100, 0, 'skewy', 'len', outExpo},
+						{311, 0.5, 0, 100, 'drunk', 'len', outExpo},
+						
+						{312, .75, -250, -150, 'movex', 'len', outElastic, 1},
+						{312, .75, 250, 150, 'movex', 'len', outElastic, 2},
+						{312.75, .75, -150, -50, 'movex', 'len', outElastic, 1},
+						{312.75, .75, 150, 50, 'movex', 'len', outElastic, 2},
+						{313.5, .75, -50, 50, 'movex', 'len', outElastic, 1},
+						{313.5, .75, 50, -50, 'movex', 'len', outElastic, 2},
+						{314.25, .5, 50, 150, 'movex', 'len', outElastic, 1},
+						{314.25, .5, -50, -150, 'movex', 'len', outElastic, 2},
+						{314.75, .5, 150, 200, 'movex', 'len', outElastic, 1},
+						{314.75, .5, -150, -200, 'movex', 'len', outElastic, 2},
+						{315.25, .5, 200, 250, 'movex', 'len', outElastic, 1},
+						{315.25, .5, -200, -250, 'movex', 'len', outElastic, 2},
+						{315.75, 10.25, 250, 250, 'movex', 'len', outElastic, 1},
+						{315.75, 10.25, -250, -250, 'movex', 'len', outElastic, 2},
+						
+						{316, 0.75, 0, 10, 'rotationz', 'len', outExpo},
+						{316, 0.75, 0, -5, 'rotationy', 'len', outExpo},
+						{316.75, 0.75, 0, -100, 'drunk', 'len', outExpo},
+						{317.5, 1, 0, -5000, 'tinyz', 'len', outExpo},
+						{317.5, 1, 0, -100, 'skewy', 'len', outExpo},
+						{318.5, 0.5, -5000, 0, 'tinyz', 'len', outExpo},
+						{318.5, 0.5, -100, 0, 'skewy', 'len', outExpo},
+						{319, 0.5, 0, 100, 'drunk', 'len', outExpo},
+						
+						{320, 1.5, 0, 20, 'rotationz', 'len', outExpo},
+						{320, 1.5, 0, 5, 'rotationx', 'len', outExpo},
+						{320.75, 0.75, 0, 100, 'tipsy', 'len', outExpo},
+						{321.5, 1, 0, -10000, 'tinyz', 'len', outExpo},
+						{321.5, 1, 0, 100, 'skewy', 'len', outExpo},
+						{322.5, 0.5, -10000, 0, 'tinyz', 'len', outExpo},
+						{322.5, 0.5, 100, 0, 'skewy', 'len', outExpo},
+						{323, 0.5, 0, 100, 'drunk', 'len', outExpo},
+						
+						{324, 0.75, 0, 30, 'rotationz', 'len', outExpo},
+						{324, 0.75, 0, 5, 'rotationy', 'len', outExpo},
+						{324.75, 0.75, 0, 100, 'drunk', 'len', outExpo},
+						{325.5, 1, 0, 5000, 'tinyz', 'len', outExpo},
+						{325.5, 1, 0, 100, 'skewy', 'len', outExpo},
+						{326.5, 0.5, 5000, 0, 'tinyz', 'len', outExpo},
+						{326.5, 0.5, 100, 0, 'skewy', 'len', outExpo},
+						{327, 0.5, 0, 100, 'tipsy', 'len', outExpo},
+						
+						{316, 0.75, 0, 10, 'rotationz', 'len', outExpo},
+						{316, 0.75, 0, -5, 'rotationy', 'len', outExpo},
+						{316.75, 0.75, 0, -100, 'drunk', 'len', outExpo},
+						{317.5, 1, 0, -5000, 'tinyz', 'len', outExpo},
+						{317.5, 1, 0, -100, 'skewy', 'len', outExpo},
+						{318.5, 0.5, -5000, 0, 'tinyz', 'len', outExpo},
+						{318.5, 0.5, -100, 0, 'skewy', 'len', outExpo},
+						{319, 0.5, 0, 100, 'drunk', 'len', outExpo},
+						
+						{327.5, 0.5, 0, -50, 'skewx', 'len', outExpo},
+						{327.5, 0.5, 0, 250, 'holdgirth3', 'len', outExpo},
+						{328, 1.5, 0, 250, 'holdgirth0', 'len', outExpo},
+						{328, 1.5, 0, 50, 'skewx', 'len', outExpo},
+						{329.5, 1.5, 0, 250, 'holdgirth1', 'len', outExpo},
+						{329.5, 1.5, 0, 50, 'skewy', 'len', outExpo},
+						{329.5, 1, 100, 100, 'incoming', 'len', outExpo},
+						{329.5, 2, -100, -100, 'movex', 'len', outElastic},
+						
+						{332, 0.75, 0, -30, 'rotationz', 'len', outExpo},
+						{332, 0.75, 0, -5, 'rotationx', 'len', outExpo},
+						{332.75, 0.75, 0, 200, 'drunk', 'len', outExpo},
+						{333.5, 1, 0, 10000, 'tinyz', 'len', outExpo},
+						{333.5, 1, 0, 100, 'skewy', 'len', outExpo},
+						{334.5, 0.5, 10000, 0, 'tinyz', 'len', outExpo},
+						{334.5, 0.5, 100, 0, 'skewy', 'len', outExpo},
+						{335, 0.5, 0, 100, 'tipsy', 'len', outExpo},
+						
+						{336, 1, 0, 250, 'holdgirth3', 'len', outExpo},
+						{336, 1, 0, -50, 'skewx', 'len', outExpo},
+						{337, 1, 0, 250, 'holdgirth2', 'len', outExpo},
+						{337, 1, 0, -50, 'skewy', 'len', outExpo},
+						{338, 1, 0, 250, 'holdgirth1', 'len', outExpo},
+						{338, 1, 0, 50, 'skewy', 'len', outExpo},
+						{339, 1, 0, 250, 'holdgirth0', 'len', outExpo},
+						{339, 1, 0, 50, 'skewx', 'len', outExpo},
+						{340, 0.1, 250, 0, 'holdgirth0', 'len', linear},
+						
+						{340, 0.75, 0, 20, 'rotationz', 'len', outExpo},
+						{340, 0.75, 0, 20, 'rotationx', 'len', outExpo},
+						{340.75, 0.75, 0, 100, 'tipsy', 'len', outExpo},
+						{341.5, 1, 0, -10000, 'tinyz', 'len', outExpo},
+						{341.5, 1, 0, 100, 'skewy', 'len', outExpo},
+						{342.5, 0.5, -10000, 0, 'tinyz', 'len', outExpo},
+						{342.5, 0.5, 100, 0, 'skewy', 'len', outExpo},
+						{343, 0.5, 0, 200, 'drunk', 'len', outExpo},
+						
+						{343.5, 0.5, 0, -50, 'skewx', 'len', outExpo},
+						{343.5, 0.5, 0, 250, 'holdgirth0', 'len', outExpo},
+						{344, 1.5, 0, 250, 'holdgirth3', 'len', outExpo},
+						{344, 1.5, 0, 50, 'skewx', 'len', outExpo},
+						{345.5, 1.5, 0, 250, 'holdgirth1', 'len', outExpo},
+						{345.5, 1.5, 0, 50, 'skewy', 'len', outExpo},
+						{345.5, 1, 100, 100, 'incoming', 'len', outExpo},
+						{345.5, 2, -100, -100, 'movex', 'len', outElastic},
+						
+						{348, 1.5, 0, 20, 'rotationz', 'len', outExpo},
+						{348.5, 1.5, 0, 5, 'rotationx', 'len', outExpo},
+						{349, 0.75, 0, 100, 'tipsy', 'len', outExpo},
+						{349, 1, 0, -10000, 'tinyz', 'len', outExpo},
+						{349.5, 1, 0, 100, 'skewy', 'len', outExpo},
+						{349.5, 0.5, -10000, 0, 'tinyz', 'len', outExpo},
+						{350, 0.5, 100, 0, 'skewy', 'len', outExpo},
+						{350, 0.5, 0, 100, 'drunk', 'len', outExpo},
+						
+						--{196, 2, 0, -50, 'tornado', 'len', inCirc},
+						--{196, 1.1, 0, -30, 'rotationz', 'len', outExpo},
+						--{197, 1.1, -30, 30, 'rotationz', 'len', outExpo}, 
+						--{197, 10, 100, 100, 'wave', 'len', inCirc},
+						--{197, 10, -50, -50, 'tornado', 'len', inCirc},
+						
+					
 						-----------------------------------------------------
 						
 						
@@ -686,6 +1061,10 @@ end
 				{148, function()
 					prefix_player1:effectmagnitude(0,0,0)
 					prefix_player2:effectmagnitude(0,0,0)
+				end, true},
+				{300, function()
+					prefix_player1:effectmagnitude(5,5,5)
+					prefix_player2:effectmagnitude(5,5,5)
 				end, true},
 		
 				{0,function()
