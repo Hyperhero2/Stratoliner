@@ -52,12 +52,14 @@ end"
 ------------------------------------------------
 --------- Sprites are going here ---------------
 ------------------------------------------------	
-	<Layer
-		File="../bg/space.png"
+	<Layer 
+		File="../bg/space.png" 
 		OnCommand="%
-		function(self)
-			self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+			function(self)
+			self:xy(SCREEN_CENTER_X,SCREEN_CENTER_Y)
+			self:customtexturerect(0,0,5,5)
 			self:diffusealpha(0)
+			self:zoom(8)
 			prefix_space = self
 		end
 	"/>
@@ -96,8 +98,8 @@ end"
 		function(self)
 			self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
 			self:diffusealpha(0)
+			self:zoom(1.5)
 			self:hidden(0)
-			self:zoom(2)
 			prefix_window = self
 		end
 	"/>
@@ -562,7 +564,7 @@ end"
 						{349.5, 6.5, 2000, 0, function(a) prefix_sky:y(a) end, 'len', linear},
 						---------------------
 						{148, 10, 1.5, 5, function(a) prefix_window:zoom(a) end, 'len', outExpo},
-						{148, 10, 1, 1.25, function(a) prefix_space:zoom(a) end, 'len', outExpo},
+						{148, 10, 8, 8.25, function(a) prefix_space:zoom(a) end, 'len', outExpo},
 						{196, 7, 400, 550, function(a) prefix_space:x(a) end, 'len', outExpo},
 						{204, 2, 550, 400, function(a) prefix_space:x(a) end, 'len', outExpo},
 						{204, 2, 300, 350, function(a) prefix_space:y(a) end, 'len', outExpo},
