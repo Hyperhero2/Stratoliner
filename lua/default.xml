@@ -63,13 +63,25 @@ end"
 			prefix_space = self
 		end
 	"/>
+	<Layer 
+		File="../bg/tamaneko.png" 
+		OnCommand="%
+			function(self)
+			self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+			self:diffusealpha(0)
+			self:zoom(0.1)
+			self:x(1000)
+			self:y(100)
+			prefix_tamaneko = self
+		end
+	"/>
 	<Layer
 		File="../bg/sky.jpg"
 		OnCommand="%
 		function(self)
 			self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
 			self:diffusealpha(0)
-			self:zoomy(2)
+			self:zoomy(10)
 			prefix_sky = self
 		end
 	"/>
@@ -79,7 +91,7 @@ end"
 		function(self)
 			self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
 			self:diffusealpha(0)
-			self:zoom(0.75)
+			self:zoom(2)
 			prefix_field = self
 		end
 	"/>
@@ -400,11 +412,12 @@ end"
 						{36, 10, 0, 180, function(a) prefix_background:rotationz(a) end, 'len', linear},
 						{36, 10, 0, 180, function(a) prefix_background:rotationx(a) end, 'len', linear},
 						{36, 20, 1, 0.001, function(a) prefix_background:zoom(a) end, 'len', outExpo},
-						{36, 5, 1, 0.5, function(a) prefix_field:zoom(a) end, 'len', outExpo},
+						{36, 5, 1, 1.5, function(a) prefix_field:zoom(a) end, 'len', outExpo},
 						{36, 10, 0, 1, function(a) prefix_window:diffusealpha(a) end, 'len', outExpo},
 						{36, 0.1, 0, 1, function(a) prefix_field:diffusealpha(a) end, 'len', outExpo},
 						{36, 0.1, 0, 1, function(a) prefix_sky:diffusealpha(a) end, 'len', outExpo},
 						{36, 0.1, 0, 1, function(a) prefix_space:diffusealpha(a) end, 'len', outExpo},
+						{36, 0.1, 0, 1, function(a) prefix_tamaneko:diffusealpha(a) end, 'len', outExpo},
 						{300, 5, 1, 0, function(a) prefix_space:diffusealpha(a) end, 'len', outExpo},
 						{36, 15, 0, 200, 'space', 'len', linear},
 						{36, 15, 0, 50, 'mini', 'len', inExpo},
@@ -566,12 +579,16 @@ end"
 						{148, 10, 1.5, 5, function(a) prefix_window:zoom(a) end, 'len', outExpo},
 						{148, 10, 8, 8.25, function(a) prefix_space:zoom(a) end, 'len', outExpo},
 						{196, 7, 400, 550, function(a) prefix_space:x(a) end, 'len', outExpo},
+						
 						{204, 2, 550, 400, function(a) prefix_space:x(a) end, 'len', outExpo},
 						{204, 2, 300, 350, function(a) prefix_space:y(a) end, 'len', outExpo},
+						
 						{228, 2, 350, 100, function(a) prefix_space:y(a) end, 'len', outExpo},
 						{228, 2, 400, 250, function(a) prefix_space:x(a) end, 'len', outExpo},
+						
 						{236, 2, 250, -250, function(a) prefix_space:x(a) end, 'len', outExpo},
 						{236, 2, 100, 400, function(a) prefix_space:y(a) end, 'len', outExpo},
+						
 						{100, 32, 1, 0, function(a) prefix_sky:diffusealpha(a) end, 'len', linear},
 						{252, 6, -250, 400, function(a) prefix_space:x(a) end, 'len', outExpo},
 						{252, 6, 400, 300, function(a) prefix_space:y(a) end, 'len', outExpo},
@@ -724,6 +741,10 @@ end"
 						{235, 0.5, 10, 0, 'flip', 'len', inExpo},
 						
 						{236, 1, 0, 100, 'flip', 'len', outExpo},
+						{236, 2, 700, 500, function(a) prefix_tamaneko:x(a) end, 'len', outExpo},
+						{236, 2, 50, 100, function(a) prefix_tamaneko:y(a) end, 'len', outExpo},
+						{252, 2, 500, 700, function(a) prefix_tamaneko:x(a) end, 'len', outExpo},
+						{252, 2, 1, 0, function(a) prefix_tamaneko:diffusealpha(a) end, 'len', linear},
 						{237, 1, 100, 0, 'flip', 'len', outExpo},
 						
 						{238, 0.5, 0, 10, 'flip', 'len', outExpo},
